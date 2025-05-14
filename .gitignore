@@ -1,0 +1,9 @@
+
+# Laravel (back)
+back/vendor
+back/node_modules
+back/.env
+
+# Next.js (front)
+front/node_modules
+front/.next
