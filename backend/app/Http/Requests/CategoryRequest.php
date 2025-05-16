@@ -24,13 +24,12 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3'],
-            'slug' => ['required', 'string', 'unique:categories,slug']
+            'slug' => ['nullable', 'string', 'unique:categories,slug', $this->category?->id]
         ];
     }
 
     protected function prepareForValidation()
     {
-        logger('prepareForValidation');
         $this->merge([
             'slug' => Str::slug($this->name),
         ]);
