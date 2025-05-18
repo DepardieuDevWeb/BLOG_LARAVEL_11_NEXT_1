@@ -11,6 +11,11 @@ class Category extends Model
         'slug'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function articles()
     {
         return $this->hasMany(Article::class);

@@ -14,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::with('category')->latest()->paginate(10);
+        $category = Category::with('articles')->latest()->paginate(10);
+        return response()->json([
+            'data' => $category
+        ], 201);;
     }
 
     /**
