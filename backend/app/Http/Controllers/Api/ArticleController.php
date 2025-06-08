@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,6 +17,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        // User::create([
+        //     'name' => "Nguetebe Pascal Shadrac Depardieu",
+        //     'email' => 'depardieu.nguetebe@gmail.com',
+        //     'password' => Hash::make('dep@rdieu97'),
+        // ]);
         return Article::with('category')->latest()->paginate(10);
     }
 
@@ -41,7 +48,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $article->load('category');
+        $article->load('category', 'comments');
         return response()->json([
             'data' => $article
         ]);

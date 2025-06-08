@@ -2,9 +2,8 @@ import { getACategoryBySlug } from "@/app/lib/api";
 import Link from "next/link";
 
 const Category = async ({ params }) => {
-  const data = await getACategoryBySlug(params.slug);
-  const category = data.data;
-  console.log(category);
+  const category = await getACategoryBySlug(params.slug);
+  // const category = data.data;
 
   return (
     <div>

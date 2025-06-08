@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class CategoryRequest extends FormRequest
+class loginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +22,16 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:3'],
-            'slug' => ['nullable', 'string', Rule::unique('categories', 'slug')->ignore($this->category?->id),]
+            'email' => ['required', 'min:4'],
+            'password' => ['required', 'min:4']
         ];
     }
 
-    protected function prepareForValidation()
+    public function messages()
     {
-        $this->merge([
-            'slug' => Str::slug($this->name),
-        ]);
+        return [
+            'email.required' => 'Ce champ est obligatoire.',
+            'password.required' => 'Ce champ est obligatoire.',
+        ];
     }
 }

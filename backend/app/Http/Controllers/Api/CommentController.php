@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
@@ -20,7 +21,16 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'content' => 'required|string',
+            'article_id' => 'required|exists:articles,id'
+        ]);
+        $comment = Comment::create($validated);
+        return response()->json([
+            'message' => 'Commententaire ajouté avec succès',
+            'comment' => $comment
+        ], 201);
     }
 
     /**

@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $category = Category::with('articles')->latest()->paginate(10);
         return response()->json([
             'data' => $category
-        ], 201);;
+        ], 200);;
     }
 
     /**
