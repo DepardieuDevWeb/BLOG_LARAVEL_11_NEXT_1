@@ -26,7 +26,7 @@ class ArticleRequest extends FormRequest
             'title' => ['required', 'string', 'min:3'],
             'slug' => ['nullable', 'string', 'unique:articles,slug'],
             'content' => ['required', 'string'],
-            'thumbnail' => ['nullable', 'image', 'mimes:png,jpg', 'max:2048'],
+            'thumbnail' => ['nullable', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'category_id' => ['required', 'exists:categories,id'],
             'is_featured' => ['nullable', 'boolean'],
             'views' => ['nullable', 'integer', 'min:0']

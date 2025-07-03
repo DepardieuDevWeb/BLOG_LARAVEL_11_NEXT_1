@@ -13,6 +13,19 @@ export async function getArticleBySlug(slug) {
   return res.json();
 }
 
+export async function deleteArticleBySlug(slug) {
+  const res = await fetch(`${process.env.API_URL}/api/articles/${slug}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Erreur lors de la suppression de la catégorie");
+  }
+}
+
 export async function getCategories() {
   const res = await fetch(`${process.env.API_URL}/api/categories`, {
     cache: "no-store",
@@ -41,8 +54,6 @@ export async function deleteCategoryBySlug(slug) {
       "Content-Type": "application/json",
     },
   });
-  // const rtext = await res.text();
-  // console.log("reponse brut", rtext);
 
   if (!res.ok) {
     throw new Error("Erreur lors de la suppression de la catégorie");
