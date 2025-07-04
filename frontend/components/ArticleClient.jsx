@@ -2,11 +2,16 @@
 import React, { useState } from "react";
 import { Input } from "./forms/Input";
 import { Textarea } from "./forms/Textarea";
+import Image from "next/image";
 
 const ArticleClient = ({ article }) => {
   const [content, setContent] = useState("");
   const [name, setName] = useState("");
   const [comments, setComments] = useState(article.comments || []);
+  const srcThumb =
+    article.thumbnail && article.thumbnail.trim() !== ""
+      ? `http://127.0.0.1:8000/storage/${article.thumbnail}`
+      : "/assets/images/trump.jpg";
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch("http://127.0.0.1:8000/api/comments", {
@@ -36,7 +41,12 @@ const ArticleClient = ({ article }) => {
       <article>
         <div className="mb-4">
           <p>
-            <img src="/assets/images/trump.jpg" alt="" />
+            <Image
+              src={srcThumb}
+              alt={article.title}
+              width={400}
+              height={250}
+            />
           </p>
           <h1 className="mb-4 font-bold">{article.title}</h1>
           <p>{article.content}</p>
